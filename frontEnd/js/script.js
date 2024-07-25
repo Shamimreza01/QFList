@@ -1,19 +1,7 @@
-
-// let data={
-//     Name:"shihab mubin",
-//     ImgUrl:"../image/shihab.jpg",
-//     Occupation: "student",
-//     Institution: "Pabna University of science and Technology",
-//     Department:"Mathematics",
-//     Roll:"200314",
-//     Session:"2019-2020",
-//     Address:"Soipara,Mohonpur,Rajshahi",
-//     Date:"07-20-2024",
-//     Killed_By:"none"
-
-// }
+import {makeUrl } from "./common.js";
+import sliceDetails from "./common.js";
 async function getData() {
-    const url = 'http://localhost:1516/data';
+    const url = makeUrl('/data');
     const response = await fetch(url);
     const datum = await response.json();
    
@@ -53,20 +41,21 @@ async function getData() {
   }
   
   function makeHtmlCode(data,currentProfileIndex,totalProfile) {
+    const {_id,Name,ImgUrl,Occupation,Institution,Department,DepartmentalInfo,ParentsInfo,Address,Date,Profile_Link,DetailsInfo,ProviderInfo}=data;
     const identity = `
     <h3> ${currentProfileIndex+1} / ${totalProfile} </h3>
       <div class="imgCard">
-        <img src="${data.ImgUrl}" class="img" alt='${data.Name}' >
+        <img src="${ImgUrl}" class="img" alt='${Name}' >
       </div>
       <div class="identity">
         <div>
-          <h2>${data.Name}</h2>
-          <h4>${data.Department}</h4>
-          <h5>${data.Institution}</h5>
-          <p>Roll: ${data.Roll} session:${data.Session}</p>
-          <p>Address: ${data.Address} </p>
-          <p>Date: ${data.Date} </p>
-          <p>Killed by: ${data.Killed_By}</p>
+          <h2>${Name}</h2>
+          <h4>${Department}</h4>
+          <h5>${Institution}</h5>
+          <p>${DepartmentalInfo} </p>
+          <p>${data.Address} </p>
+          <p class='deathDate'>Death Date: ${Date} </p>
+          <p>${sliceDetails(DetailsInfo,50)} <a href='../html/FFDetailsInfo.html?id=${_id}'> <button> more </button></a></p>
         </div>
       </div>
       <div class="buttonSection">

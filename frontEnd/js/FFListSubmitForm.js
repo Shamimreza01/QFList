@@ -1,3 +1,5 @@
+import { makeUrl } from "./common.js";
+
 let i=1;
 document.addEventListener('submit',async (e)=>{
     e.preventDefault();
@@ -6,13 +8,13 @@ document.addEventListener('submit',async (e)=>{
     let Occupation=e.target.occupation.value;
     let Institution=e.target.institution.value;
     let Department=e.target.department.value;
-    let Roll=e.target.roll.value;
-    let Session=e.target.session.value;
+    let DepartmentalInfo=e.target.departmentalInfo.value;
+    let ParentsInfo=e.target.parentsInfo.value;
     let Address=e.target.address.value;
     let Date=e.target.date.value;
-    let Killed_By=e.target.killed_by.value;
     let Profile_Link=e.target.profileUrl.value;
-    let Description=e.target.description.value;
+    let DetailsInfo=e.target.detailsInfo.value;
+    let ProviderInfo=e.target.providerInfo.value;
     
     const data={
         "Name": Name,
@@ -20,20 +22,20 @@ document.addEventListener('submit',async (e)=>{
         "Occupation": Occupation,
         "Institution": Institution,
         "Department": Department,
-        "Roll": Roll,
-        "Session": Session,
+        "DepartmentalInfo": DepartmentalInfo ,
+        "ParentsInfo": ParentsInfo,
         "Address": Address,
         "Date": Date,
-        "Killed_By": Killed_By,
         "Profile_Link":Profile_Link,
-        "Description": Description
+        "DetailsInfo": DetailsInfo,
+        "ProviderInfo": ProviderInfo
     }
     console.log(data);
     if(i===1){
         alert("recheck");
         i++;
     }else{
-    const url=`http://localhost:1516/api/FFListSubmit`;
+    const url=makeUrl('/FFListSubmit');
     const response=await fetch(url,{
         method: "POST",
         headers:{
