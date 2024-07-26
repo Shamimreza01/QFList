@@ -55,7 +55,9 @@ async function run() {
     process.exit(1);
   }
 }
-
+app.get('/',(req,res)=>{
+   res.send({"data":"server is running"});
+})
 run();
 
 const port = process.env.PORT;
